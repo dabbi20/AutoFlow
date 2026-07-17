@@ -1,6 +1,15 @@
 INSERT INTO roles (name, description)
-VALUES
-    ('ADMIN', 'Administrador con acceso completo al sistema'),
-    ('MECHANIC', 'Mecánico encargado del diagnóstico y reparación'),
-    ('SERVICE_ADVISOR', 'Asesor encargado de la gestión y atención al cliente'),
-    ('CUSTOMER', 'Cliente con acceso al seguimiento de su vehículo');
+VALUES ('ADMIN', 'ADMINISTRADOR CUENTA CON TODOS LOS PERMISOS DEL SISTEMA')
+RETURNING name, description;
+
+INSERT INTO roles (name, description)
+VALUES ('CUSTOMER', 'CLIENTE PERSONA QUE NECESITA EL SERVICIO')
+RETURNING name, description;
+
+INSERT INTO roles (name, description)
+VALUES('MECHANIC','MECANICO ENCARGADO DE EVALUAR DIAGNOSTICOS Y ARREGLAR INCONVENIENTES EN LOS VEHICULOS')
+RETURNING name, description;
+
+INSERT INTO roles (name,description)
+VALUES('ASESOR','SE ENCARGA DE LA ATENCION DEL USUARIO')
+RETURNING name,description;
