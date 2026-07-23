@@ -1,11 +1,19 @@
 package com.autoflow.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table (name = "roles")
 public class Role {
     @Id
@@ -19,4 +27,21 @@ public class Role {
 
     @OneToMany(mappedBy = "role")
     private Set<UserAccountRole>userAccountRoles = new HashSet<>();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Role otro)){
+            return false;
+        }
+
+        return name != null && name.equals(otro.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 }

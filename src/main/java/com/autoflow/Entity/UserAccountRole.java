@@ -1,20 +1,55 @@
 package com.autoflow.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user_account_roles")
 public class UserAccountRole {
+    @EmbeddedId
+    private UserAccountRoleId id;
 
-
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_account_id")
+    @MapsId("userAccountId")
+    @JoinColumn(name = "user_account_id",nullable = false)
     private UserAccount userAccount;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id",nullable = false)
     private Role role;
+
+    public  UserAccountRole(){}
+
+    public UserAccountRole(UserAccountRoleId id, UserAccount userAccount, Role role) {
+        this.id = id;
+        this.userAccount = userAccount;
+        this.role = role;
+    }
+
+    public UserAccountRoleId getId() {
+        return id;
+    }
+
+    public void setId(UserAccountRoleId id) {
+        this.id = id;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
